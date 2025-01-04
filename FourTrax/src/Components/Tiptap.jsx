@@ -23,9 +23,11 @@ const extensions = [
 ];
 
 const content = `
-<h2>
-  Hello! Write anything you want
-</h2>
+<div>
+  <h2>
+    Hello! Write anything you want
+  </h2>
+</div>
 `;
 
 const extent = () => {
@@ -34,7 +36,9 @@ const extent = () => {
       slotBefore={<MenuBar />}
       extensions={extensions}
       content={content}
-    ></EditorProvider>
+    >
+      <div className="tiptap-editor"></div>
+    </EditorProvider>
   );
 };
 
