@@ -54,17 +54,17 @@
 
   /* Code and preformatted text styles */
   code {
-    background-color: var(--purple-light);
+    background-color: purple;
     border-radius: 0.4rem;
-    color: var(--black);
+    color: black;
     font-size: 0.85rem;
     padding: 0.25em 0.3em;
   }
 
   pre {
-    background: var(--black);
+    background: black;
     border-radius: 0.5rem;
-    color: var(--white);
+    color: white;
     font-family: "JetBrainsMono", monospace;
     margin: 1.5rem 0;
     padding: 0.75rem 1rem;
@@ -78,14 +78,29 @@
   }
 
   blockquote {
-    border-left: 3px solid var(--gray-3);
+    border-left: 3px solid grey;
     margin: 1.5rem 0;
     padding-left: 1rem;
   }
 
   hr {
     border: none;
-    border-top: 1px solid var(--gray-2);
+    border-top: 1px solid gray;
     margin: 2rem 0;
   }
+}
+
+.btn-container button {
+  border: 1px solid gray;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.btn-container button :active {
+  background-color: orchid;
+  color: whitesmoke;
+}
+
+.writeing {
+  padding: 6px 18px;
+  color: red;
 }
