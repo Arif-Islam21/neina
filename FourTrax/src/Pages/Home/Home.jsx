@@ -1,7 +1,10 @@
+import Tiptap from "../../Components/Tiptap";
+
 const Home = () => {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center"> Hello world</h2>
+      <Tiptap />
+      <h2>hello</h2>
     </div>
   );
 };
