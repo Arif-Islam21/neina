@@ -4,7 +4,6 @@ const Home = () => {
   return (
     <div>
       <Tiptap />
-      <h2>hello</h2>
     </div>
   );
 };
