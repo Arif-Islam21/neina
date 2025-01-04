@@ -95,12 +95,17 @@
   padding: 8px 12px;
   border-radius: 8px;
 }
-.btn-container button :active {
-  background-color: orchid;
-  color: whitesmoke;
+
+.tiptap-editor {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 200px;
 }
 
-.writeing {
-  padding: 6px 18px;
-  color: red;
+.is-active {
+  background-color: rgba(2, 45, 13, 0.747);
+  color: white;
+  font-weight: bold;
 }
