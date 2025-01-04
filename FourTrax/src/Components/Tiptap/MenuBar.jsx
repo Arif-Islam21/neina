@@ -10,7 +10,7 @@ const MenuBar = () => {
 
   return (
     <div className="control-group">
-      <div className="button-group flex container mx-auto gap-2 items-center btn-container flex-wrap justify-center py-6 group-btn">
+      <div className="button-group flex max-w-[1024px] mx-auto gap-2 items-center btn-container flex-wrap justify-center py-6 group-btn">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}

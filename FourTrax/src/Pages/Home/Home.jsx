@@ -1,4 +1,4 @@
-import Tiptap from "../../Components/Tiptap";
+import Tiptap from "../../Components/Tiptap/Tiptap";
 
 const Home = () => {
   return (
