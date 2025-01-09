@@ -94,7 +94,7 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <FaRegBell size={26} />
             <div className="flex items-center gap-4 bg-[#1D2633] rounded-md p-2 font-bold">
-              <h2 className="text-xl p-2 px-4 font-bold rounded-md text-[#303947] bg-[#F8C2B3]">
+              <h2 className="text-xl p-2 px-4 font-bold text-center rounded-md text-[#303947] bg-[#F8C2B3]">
                 p
               </h2>
               <h3>Profile</h3>

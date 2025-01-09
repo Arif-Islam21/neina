@@ -3,7 +3,12 @@ import daisyui from "daisyui";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        secondColor: "#5A5FBC",
+        thirdColor: "#059794",
+      },
+    },
   },
   plugins: [daisyui],
 };
