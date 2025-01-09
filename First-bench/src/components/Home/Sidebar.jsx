@@ -1,3 +1,4 @@
+import RecheckCard from "../Cards/RecheckCard";
 import ResultCard from "../Cards/ResultCard";
 import image from "/assets/mark-image.jpg";
 
@@ -16,6 +17,7 @@ const Sidebar = () => {
         </p>
         <div className="card-actions justify-end">
           <ResultCard />
+          <RecheckCard />
         </div>
       </div>
     </div>
