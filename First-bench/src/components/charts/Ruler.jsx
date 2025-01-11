@@ -27,12 +27,15 @@ const RulerComponent = () => {
           height={30}
           unit={10}
           mainLineSize={15}
-          longLineSize={10}
-          shortLineSize={7}
+          direction="top"
+          zoom={2}
+          longLineSize={7}
+          shortLineSize={2}
           backgroundColor="#f3f3f3"
           lineColor="#8385D6"
           textColor="#333"
           style={{ margin: "20px 0" }}
+          textFormat={(scale) => `${scale} px`}
         />
       </div>
     </div>
