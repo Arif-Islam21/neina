@@ -30,7 +30,7 @@ const RulerComponent = () => {
           longLineSize={10}
           shortLineSize={7}
           backgroundColor="#f3f3f3"
-          lineColor="#333"
+          lineColor="#8385D6"
           textColor="#333"
           style={{ margin: "20px 0" }}
         />
