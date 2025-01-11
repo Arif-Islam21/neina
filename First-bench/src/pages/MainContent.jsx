@@ -1,3 +1,5 @@
+import Chart from "../components/charts/Chart";
+import RulerComponent from "../components/charts/Ruler";
 import Approach from "../components/MainContent/Approach";
 import CompareCard from "../components/MainContent/CompareCard";
 import ImprovementCard from "../components/MainContent/ImprovementCard";
@@ -19,6 +21,11 @@ const MainContent = () => {
         <Response />
         <Approach />
         <Suggestion />
+      </div>
+      {/* CHARTS AND RULER GOES HERE */}
+      <div className="grid grid-cols-2 gap-6 my-6">
+        <Chart />
+        <RulerComponent />
       </div>
     </div>
   );
