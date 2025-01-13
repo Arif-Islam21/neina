@@ -1,14 +1,15 @@
+import { NavLink } from "react-router";
+
 const Register = () => {
   return (
     <div className="bg-base-200">
-      <div className="hero min-h-[80vw] container mx-auto">
+      <div className="hero lg:py-24 container mx-auto">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+            <h1 className="text-5xl font-bold">Register now!</h1>
+            <p className="py-6 max-w-lg">
+              Login Now for geting exciting deals and offers. It is very easy to
+              login to our website. So, We will see you soon.
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -34,16 +35,19 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn border-2 border-green-950 font-bold hover:bg-green-800 hover:text-white">
+                  Register
+                </button>
               </div>
             </form>
+            <p className="text-sm font-semibold text-center pb-4">
+              Already have an account?
+              <NavLink to="/login" className="btn-link">
+                Login
+              </NavLink>
+            </p>
           </div>
         </div>
       </div>
