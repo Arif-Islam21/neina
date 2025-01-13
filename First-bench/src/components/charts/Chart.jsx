@@ -19,7 +19,7 @@ const Chart = () => {
     },
     {
       name: "Page B",
-      Slots: 30,
+      Slots: 67,
       pv: 2,
       amt: 2210,
     },
