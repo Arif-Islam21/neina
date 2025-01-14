@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 require("dotenv").config();
 
@@ -25,6 +26,14 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     const userCollection = client.db("craftMyPlate").collection("users");
+
+    app.post("/jwt", (req, res) => {
+      const userEmail = req.body;
+      const token = jwt.sign(userEmail, process.env.TOKEN_SECRET, {
+        expiresIn: "10d",
+      });
+      res.send({ token });
+    });
 
     app.post("/users", async (req, res) => {
       const data = req.body;

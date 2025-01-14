@@ -1,16 +1,17 @@
 import { NavLink } from "react-router";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
+import useAxiosCommon from "../hooks/useAxiosCommon";
 
 const Register = () => {
   const { registerUser } = useAuth();
+  const AxiosCommon = useAxiosCommon();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -20,13 +21,13 @@ const Register = () => {
 
     await registerUser(email, password).then(async (res) => {
       if (res.user.uid) {
-        await axios
-          .post("http://localhost:5000/users", userData)
-          .then((res) => {
+        await AxiosCommon.post("http://localhost:5000/users", userData).then(
+          (res) => {
             if (res.data.insertedId) {
               toast.success("Successfully Account Created!");
             }
-          });
+          }
+        );
       } else {
         toast.error("User Not Created");
       }

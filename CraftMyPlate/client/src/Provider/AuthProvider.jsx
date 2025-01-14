@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import app from "../Authentication/firebase.config";
 import { createContext, useEffect, useState } from "react";
+import useAxiosCommon from "../hooks/useAxiosCommon";
 
 export const AuthContext = createContext(null);
 
@@ -15,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const auth = getAuth(app);
+  const AxiosCommon = useAxiosCommon();
 
   const registerUser = (email, password) => {
     setLoading(true);
@@ -33,12 +35,21 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
       if (currentUser) {
-        setUser(currentUser);
         console.log(currentUser.email);
+        await AxiosCommon.post("/jwt", { email: currentUser.email }).then(
+          (data) => {
+            if (data.data) {
+              localStorage.setItem("accessToken", data?.data?.token);
+              setLoading(false);
+            }
+          }
+        );
         setLoading(false);
       } else {
         setUser(null);
+        localStorage.removeItem("accessToken");
         setLoading(false);
       }
     });
