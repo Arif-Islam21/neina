@@ -45,7 +45,9 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl font-mono">Food Crafty</a>
+          <NavLink to="/" className="btn btn-ghost text-xl font-mono">
+            Food Crafty
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -80,7 +82,7 @@ const Navbar = () => {
             </NavLink>
             <NavLink
               to="/register"
-              className="btn border-2 border-green-950 font-bold hover:bg-green-800 hover:text-white"
+              className="btn border-2 border-green-950 font-bold hover:bg-white text-white bg-green-800 hover:text-green-950"
             >
               Register
             </NavLink>
