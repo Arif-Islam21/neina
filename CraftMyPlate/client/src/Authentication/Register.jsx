@@ -1,21 +1,27 @@
-import { useContext } from "react";
 import { NavLink } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
+
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
 
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser } = useAuth();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    await registerUser(email, password).then((res) => console.log(res));
+    await registerUser(email, password).then((res) => {
+      if (res.user.uid) {
+        toast.success("Successfully Account Created!");
+      } else {
+        toast.error("User Not Created");
+      }
+    });
   };
 
   return (

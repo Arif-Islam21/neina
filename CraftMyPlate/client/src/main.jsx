@@ -4,6 +4,7 @@ import "./index.css";
 import AppRoute from "./Routes/AppRoute.jsx";
 import { BrowserRouter } from "react-router";
 import AuthProvider from "./Provider/AuthProvider.jsx";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -12,5 +13,6 @@ createRoot(document.getElementById("root")).render(
         <AppRoute />
       </BrowserRouter>
     </AuthProvider>
+    <Toaster />
   </StrictMode>
 );
