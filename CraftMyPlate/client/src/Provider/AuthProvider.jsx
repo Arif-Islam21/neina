@@ -32,10 +32,18 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      console.log(currentUser.email);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        console.log(currentUser.email);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
     });
+
+    return () => unsubscribe();
   }, [auth]);
 
   const authInfo = {
@@ -44,6 +52,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     user,
     loading,
+    setUser,
   };
 
   return (

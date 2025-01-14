@@ -1,6 +1,28 @@
 import { NavLink } from "react-router";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+  const { loginUser } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    await loginUser(email, password).then((res) => {
+      if (res.user.uid) {
+        toast.success("Successfully Logged In!");
+      } else {
+        toast.error("User Not Logged in!");
+      }
+    });
+  };
+
   return (
     <div className="bg-base-200">
       <div className="hero lg:py-24 container mx-auto">
@@ -13,7 +35,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -22,7 +44,7 @@ const Login = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
+                  {...register("email", { required: true })}
                 />
               </div>
               <div className="form-control">
@@ -33,7 +55,7 @@ const Login = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  required
+                  {...register("password", { required: true })}
                 />
               </div>
               <div className="form-control mt-6">

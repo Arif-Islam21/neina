@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
@@ -14,10 +14,19 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
-    await registerUser(email, password).then((res) => {
+    const { email, password, role } = data;
+    console.log(role);
+    const userData = { email, password, role };
+
+    await registerUser(email, password).then(async (res) => {
       if (res.user.uid) {
-        toast.success("Successfully Account Created!");
+        await axios
+          .post("http://localhost:5000/users", userData)
+          .then((res) => {
+            if (res.data.insertedId) {
+              toast.success("Successfully Account Created!");
+            }
+          });
       } else {
         toast.error("User Not Created");
       }
@@ -58,6 +67,18 @@ const Register = () => {
                   className="input input-bordered"
                   {...register("password", { required: true })}
                 />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Role</span>
+                </label>
+                <select
+                  {...register("role", { required: true })}
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option>Buyer</option>
+                  <option>Seller</option>
+                </select>
               </div>
               <div className="form-control mt-6">
                 <button className="btn border-2 border-green-950 font-bold hover:bg-green-800 hover:text-white">

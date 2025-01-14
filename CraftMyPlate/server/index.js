@@ -24,6 +24,20 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
+    const userCollection = client.db("craftMyPlate").collection("users");
+
+    app.post("/users", async (req, res) => {
+      const data = req.body;
+      const isRemaining = await userCollection.findOne({ email: data.email });
+
+      if (isRemaining) {
+        return res.send({ message: "User Already Exist" });
+      }
+
+      const result = await userCollection.insertOne(data);
+      res.send(result);
+    });
+
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     console.log(

@@ -1,6 +1,19 @@
 import { NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
+  const { user, logOut, setUser } = useAuth();
+  const handleLogout = async () => {
+    try {
+      await logOut;
+      await setUser(null);
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Error logging out", error);
+    }
+  };
+
   return (
     <div className="bg-base-100 shadow-md">
       <div className="navbar container mx-auto">
@@ -73,20 +86,48 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="flex items-center gap-3 ">
-            <NavLink
-              to="/login"
-              className="btn border-2 border-green-950 font-bold hover:bg-green-800 hover:text-white"
-            >
-              Login
-            </NavLink>
-            <NavLink
-              to="/register"
-              className="btn border-2 border-green-950 font-bold hover:bg-white text-white bg-green-800 hover:text-green-950"
-            >
-              Register
-            </NavLink>
-          </div>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full flex justify-center items-center text-center">
+                  <FaUser size={28} />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">Profile</a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 ">
+              <NavLink
+                to="/login"
+                className="btn border-2 border-green-950 font-bold hover:bg-green-800 hover:text-white"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="btn border-2 border-green-950 font-bold hover:bg-white text-white bg-green-800 hover:text-green-950"
+              >
+                Register
+              </NavLink>
+            </div>
+          )}
         </div>
       </div>
     </div>
