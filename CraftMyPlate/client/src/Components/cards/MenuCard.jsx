@@ -1,6 +1,9 @@
 import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+import { FaRegEdit } from "react-icons/fa";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { Link } from "react-router";
 
 // eslint-disable-next-line react/prop-types
 const MenuCard = ({ item, refetch }) => {
@@ -48,13 +51,22 @@ const MenuCard = ({ item, refetch }) => {
         <p className="border rounded-md max-w-32 text-center font-semibold border-green-950 text-green-700">
           {availability}
         </p>
-        <div className="card-actions justify-start ">
-          <button
-            onClick={handleDelete}
-            className="btn btn-sm btn-outline text-red-700 "
-          >
-            <MdOutlineDelete size={28} />
-          </button>
+        <div className="card-actions justify-center">
+          <div className="flex items-center justify-between mt-2 w-full gap-3">
+            <Link to="/addMenu" className="btn btn-outline text-green-800 ">
+              <IoIosAddCircleOutline size={28} />
+            </Link>
+            <button className="btn btn-outline text-blue-600 ">
+              <FaRegEdit size={28} />
+            </button>
+
+            <button
+              onClick={handleDelete}
+              className="btn btn-outline text-red-700 "
+            >
+              <MdOutlineDelete size={28} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
