@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.knlt5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const corsOptions = {
-  origin: "http://localhost:5000/",
+  origin: ["http://localhost:5000/", "http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -37,10 +37,20 @@ async function run() {
 
     app.post("/jwt", (req, res) => {
       const userEmail = req.body;
+      if (!userEmail.email) {
+        return res.send({ message: "Email is required" });
+      }
       const token = jwt.sign(userEmail, process.env.TOKEN_SECRET, {
         expiresIn: "10d",
       });
       res.send({ token });
+    });
+
+    app.post("/addMenu", async (req, res) => {
+      const data = req.body;
+      console.log(data);
+      const result = await menuCollection.insertOne(data);
+      res.send(result);
     });
 
     app.post("/users", async (req, res) => {
@@ -53,17 +63,6 @@ async function run() {
 
       const result = await userCollection.insertOne(data);
       res.send(result);
-    });
-    app.post("/addmenu", async (req, res) => {
-      try {
-        const data = req.body;
-        console.log(data);
-        const result = await menuCollection.insertOne(data);
-        res.send(result);
-      } catch (error) {
-        console.error("Error inserting data into MongoDB:", error);
-        res.status(500).send({ message: "Failed to insert data" });
-      }
     });
 
     // Send a ping to confirm a successful connection

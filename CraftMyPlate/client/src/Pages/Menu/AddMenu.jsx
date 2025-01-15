@@ -12,10 +12,10 @@ const AddMenu = () => {
     const menuData = { name, category, price: priceInt, availability };
     console.log(menuData);
     try {
-      const res = await axios.post("http://localhost:5000/addmenu", menuData);
+      const res = await axios.post("http://localhost:5000/addMenu", menuData);
       console.log(res);
     } catch (error) {
-      console.error("Error posting data to /addmenu:", error);
+      console.error("Error posting data to /addMenu:", error);
     }
   };
 
