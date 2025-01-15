@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 
 const app = express();
@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.knlt5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const corsOptions = {
-  origin: ["http://localhost:5000/", "http://localhost:5173"],
+  origin: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -46,9 +46,13 @@ async function run() {
       res.send({ token });
     });
 
-    app.post("/addMenu", async (req, res) => {
+    app.get("/menu", async (req, res) => {
+      const result = await menuCollection.find().toArray();
+      res.send(result);
+    });
+
+    app.post("/menu", async (req, res) => {
       const data = req.body;
-      console.log(data);
       const result = await menuCollection.insertOne(data);
       res.send(result);
     });
@@ -56,12 +60,17 @@ async function run() {
     app.post("/users", async (req, res) => {
       const data = req.body;
       const isRemaining = await userCollection.findOne({ email: data.email });
-
       if (isRemaining) {
         return res.send({ message: "User Already Exist" });
       }
-
       const result = await userCollection.insertOne(data);
+      res.send(result);
+    });
+
+    app.delete("/menu/:id", async (req, res) => {
+      const { id } = req.params;
+      const query = { _id: new ObjectId(id) };
+      const result = await menuCollection.deleteOne(query);
       res.send(result);
     });
 
