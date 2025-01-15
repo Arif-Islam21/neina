@@ -11,11 +11,12 @@ const AddMenu = () => {
     const priceInt = isNaN(parseInt(price)) ? 0 : parseInt(price);
     const menuData = { name, category, price: priceInt, availability };
     console.log(menuData);
-    // const res = await AxiosCommon.post("/addmenu", menuData);
-    // console.log(res);
-    await axios
-      .post("http://localhost:5000/addmenu", menuData)
-      .then((res) => console.log(res));
+    try {
+      const res = await axios.post("http://localhost:5000/addmenu", menuData);
+      console.log(res);
+    } catch (error) {
+      console.error("Error posting data to /addmenu:", error);
+    }
   };
 
   return (

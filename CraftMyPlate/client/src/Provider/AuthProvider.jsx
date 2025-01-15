@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unsubscribe();
-  }, [auth]);
+  }, [auth, AxiosCommon]);
 
   const authInfo = {
     registerUser,

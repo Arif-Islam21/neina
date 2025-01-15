@@ -8,8 +8,15 @@ const app = express();
 const port = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.knlt5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
+const corsOptions = {
+  origin: "http://localhost:5000/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
 // middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -48,10 +55,15 @@ async function run() {
       res.send(result);
     });
     app.post("/addmenu", async (req, res) => {
-      const data = req.body;
-      console.log(data);
-      const result = await menuCollection.insertOne(data);
-      res.send(result);
+      try {
+        const data = req.body;
+        console.log(data);
+        const result = await menuCollection.insertOne(data);
+        res.send(result);
+      } catch (error) {
+        console.error("Error inserting data into MongoDB:", error);
+        res.status(500).send({ message: "Failed to insert data" });
+      }
     });
 
     // Send a ping to confirm a successful connection
