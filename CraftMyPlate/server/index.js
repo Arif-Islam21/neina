@@ -26,6 +26,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     const userCollection = client.db("craftMyPlate").collection("users");
+    const menuCollection = client.db("craftMyPlate").collection("menu");
 
     app.post("/jwt", (req, res) => {
       const userEmail = req.body;
@@ -44,6 +45,12 @@ async function run() {
       }
 
       const result = await userCollection.insertOne(data);
+      res.send(result);
+    });
+    app.post("/addmenu", async (req, res) => {
+      const data = req.body;
+      console.log(data);
+      const result = await menuCollection.insertOne(data);
       res.send(result);
     });
 

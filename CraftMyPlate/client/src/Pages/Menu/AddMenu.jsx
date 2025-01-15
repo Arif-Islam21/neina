@@ -1,16 +1,22 @@
 import { useForm } from "react-hook-form";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
+import axios from "axios";
 
 const AddMenu = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
+  const AxiosCommon = useAxiosCommon();
 
-  const onSubmit = (data) => console.log(data);
-
-  console.log(watch("example"));
+  const onSubmit = async (data) => {
+    const { name, category, price, availability } = data;
+    const priceInt = isNaN(parseInt(price)) ? 0 : parseInt(price);
+    const menuData = { name, category, price: priceInt, availability };
+    console.log(menuData);
+    // const res = await AxiosCommon.post("/addmenu", menuData);
+    // console.log(res);
+    await axios
+      .post("http://localhost:5000/addmenu", menuData)
+      .then((res) => console.log(res));
+  };
 
   return (
     <div className="max-w-lg mx-auto my-12 ">
@@ -22,6 +28,15 @@ const AddMenu = () => {
             type="text"
             className="grow"
             placeholder="Menu Name"
+          />
+        </label>
+        <label className="input input-bordered flex items-center gap-2">
+          Photo
+          <input
+            {...register("photo", { required: true })}
+            type="text"
+            className="grow"
+            placeholder="Enter Photo URL"
           />
         </label>
         <select
