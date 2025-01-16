@@ -56,9 +56,12 @@ const MenuCard = ({ item, refetch }) => {
             <Link to="/addMenu" className="btn btn-outline text-green-800 ">
               <IoIosAddCircleOutline size={28} />
             </Link>
-            <button className="btn btn-outline text-blue-600 ">
+            <Link
+              to={`/updateMenu/${_id}`}
+              className="btn btn-outline text-blue-600 "
+            >
               <FaRegEdit size={28} />
-            </button>
+            </Link>
 
             <button
               onClick={handleDelete}

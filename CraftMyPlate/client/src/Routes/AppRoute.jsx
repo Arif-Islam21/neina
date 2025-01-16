@@ -5,6 +5,7 @@ import Login from "../Authentication/Login";
 import Register from "../Authentication/Register";
 import Menu from "../Pages/Menu/Menu";
 import AddMenu from "../Pages/Menu/AddMenu";
+import UpdateMenu from "../Pages/Menu/UpdateMenu";
 
 const AppRoute = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoute = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/addMenu" element={<AddMenu />} />
+        <Route path="/updateMenu/:id" element={<UpdateMenu />} />
       </Route>
     </Routes>
   );

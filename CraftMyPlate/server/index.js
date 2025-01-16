@@ -51,6 +51,13 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/menu/:id", async (req, res) => {
+      const { id } = req.params;
+      const query = { _id: new ObjectId(id) };
+      const result = await menuCollection.findOne(query);
+      res.send(result);
+    });
+
     app.post("/menu", async (req, res) => {
       const data = req.body;
       const result = await menuCollection.insertOne(data);
@@ -64,6 +71,14 @@ async function run() {
         return res.send({ message: "User Already Exist" });
       }
       const result = await userCollection.insertOne(data);
+      res.send(result);
+    });
+
+    app.put("/menu/:id", async (req, res) => {
+      const { id } = req.params;
+      const query = { _id: new ObjectId(id) };
+      const data = req.body;
+      const result = await menuCollection.updateOne(query, { $set: data });
       res.send(result);
     });
 
