@@ -34,6 +34,7 @@ async function run() {
     // await client.connect();
     const userCollection = client.db("craftMyPlate").collection("users");
     const menuCollection = client.db("craftMyPlate").collection("menu");
+    const orderCollection = client.db("craftMyPlate").collection("order");
 
     app.post("/jwt", (req, res) => {
       const userEmail = req.body;
@@ -71,6 +72,13 @@ async function run() {
         return res.send({ message: "User Already Exist" });
       }
       const result = await userCollection.insertOne(data);
+      res.send(result);
+    });
+
+    app.get("/userRole/:email", async (req, res) => {
+      const { email } = req.params;
+      const query = { email };
+      const result = await userCollection.findOne(query);
       res.send(result);
     });
 

@@ -4,12 +4,15 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { FaRegEdit } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router";
+import useUserRole from "../../hooks/useUserRole";
 
 // eslint-disable-next-line react/prop-types
 const MenuCard = ({ item, refetch }) => {
   // eslint-disable-next-line react/prop-types
   const { _id, name, category, price, availability, photo } = item;
   const AxiosCommon = useAxiosCommon();
+  const data = useUserRole();
+  console.log(data);
 
   const handleDelete = () => {
     Swal.fire({
