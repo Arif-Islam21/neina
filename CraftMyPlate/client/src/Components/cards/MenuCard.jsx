@@ -4,15 +4,34 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { FaRegEdit } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router";
-import useUserRole from "../../hooks/useUserRole";
+import useAuth from "../../hooks/useAuth";
 
 // eslint-disable-next-line react/prop-types
-const MenuCard = ({ item, refetch }) => {
+const MenuCard = ({ item, refetch, role }) => {
   // eslint-disable-next-line react/prop-types
   const { _id, name, category, price, availability, photo } = item;
   const AxiosCommon = useAxiosCommon();
-  const data = useUserRole();
-  console.log(data);
+  const { user } = useAuth();
+
+  const handleAddToCart = async () => {
+    const productInfo = {
+      productId: _id,
+      quantity: 1,
+      price: price,
+      userEmail: user?.email,
+      name,
+      availability,
+      category,
+    };
+    const res = await AxiosCommon.post("/order", productInfo);
+    if (res?.data?.insertedId) {
+      Swal.fire({
+        title: "Added to Cart",
+        text: "Your item has been added to cart",
+        icon: "success",
+      });
+    }
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -55,24 +74,33 @@ const MenuCard = ({ item, refetch }) => {
           {availability}
         </p>
         <div className="card-actions justify-center">
-          <div className="flex items-center justify-between mt-2 w-full gap-3">
-            <Link to="/addMenu" className="btn btn-outline text-green-800 ">
-              <IoIosAddCircleOutline size={28} />
-            </Link>
-            <Link
-              to={`/updateMenu/${_id}`}
-              className="btn btn-outline text-blue-600 "
-            >
-              <FaRegEdit size={28} />
-            </Link>
+          {role === "Seller" ? (
+            <div className="flex items-center justify-between mt-2 w-full gap-3">
+              <Link to="/addMenu" className="btn btn-outline text-green-800 ">
+                <IoIosAddCircleOutline size={28} />
+              </Link>
+              <Link
+                to={`/updateMenu/${_id}`}
+                className="btn btn-outline text-blue-600 "
+              >
+                <FaRegEdit size={28} />
+              </Link>
 
+              <button
+                onClick={handleDelete}
+                className="btn btn-outline text-red-700 "
+              >
+                <MdOutlineDelete size={28} />
+              </button>
+            </div>
+          ) : (
             <button
-              onClick={handleDelete}
-              className="btn btn-outline text-red-700 "
+              onClick={handleAddToCart}
+              className="btn btn-sm btn-block btn-outline border-green-800 text-green-800 font-bold"
             >
-              <MdOutlineDelete size={28} />
+              Add To Cart
             </button>
-          </div>
+          )}
         </div>
       </div>
     </div>

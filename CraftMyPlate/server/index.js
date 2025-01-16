@@ -34,6 +34,7 @@ async function run() {
     // await client.connect();
     const userCollection = client.db("craftMyPlate").collection("users");
     const menuCollection = client.db("craftMyPlate").collection("menu");
+    const cartCollection = client.db("craftMyPlate").collection("cart");
     const orderCollection = client.db("craftMyPlate").collection("order");
 
     app.post("/jwt", (req, res) => {
@@ -59,9 +60,33 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/userRole/:email", async (req, res) => {
+      const { email } = req.params;
+      const query = { email };
+      const result = await userCollection.findOne(query);
+      res.send(result);
+    });
+
+    app.get("/cart/:email", async (req, res) => {
+      const data = req.params;
+      const query = { userEmail: data.email };
+      const result = await cartCollection.find(query).toArray();
+      res.send(result);
+    });
+
     app.post("/menu", async (req, res) => {
       const data = req.body;
       const result = await menuCollection.insertOne(data);
+      res.send(result);
+    });
+
+    app.post("/order", async (req, res) => {
+      const data = req.body;
+      return console.log(data);
+      const result = await orderCollection.insertOne(data);
+      const clearCart = await cartCollection.deleteMany({
+        userEmail: data?.email,
+      });
       res.send(result);
     });
 
@@ -75,10 +100,9 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/userRole/:email", async (req, res) => {
-      const { email } = req.params;
-      const query = { email };
-      const result = await userCollection.findOne(query);
+    app.post("/order", async (req, res) => {
+      const data = req.body;
+      const result = await cartCollection.insertOne(data);
       res.send(result);
     });
 

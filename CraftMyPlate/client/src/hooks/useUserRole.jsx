@@ -6,7 +6,7 @@ const useUserRole = () => {
   const AxiosCommon = useAxiosCommon();
   const { user } = useAuth();
   //   console.log(user);
-  const { data } = useQuery({
+  const { data = [] } = useQuery({
     queryKey: ["userRole", user?.email],
     queryFn: async () => {
       const { data } = await AxiosCommon.get(`/userRole/${user?.email}`);

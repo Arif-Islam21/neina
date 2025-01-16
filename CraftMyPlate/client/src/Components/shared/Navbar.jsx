@@ -28,6 +28,10 @@ const Navbar = () => {
       name: "Add Menu",
       link: "/addMenu",
     },
+    {
+      name: "Cart",
+      link: "/cart",
+    },
   ];
 
   const navLinks = (
