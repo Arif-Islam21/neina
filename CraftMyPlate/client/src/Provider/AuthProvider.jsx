@@ -35,8 +35,8 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
       if (currentUser) {
+        setUser(currentUser);
         console.log(currentUser.email);
         await AxiosCommon.post("/jwt", { email: currentUser.email }).then(
           (data) => {
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unsubscribe();
-  }, [auth, AxiosCommon]);
+  }, [auth]);
 
   const authInfo = {
     registerUser,
