@@ -20,12 +20,7 @@ const Cart = () => {
 
   const handleOrder = async () => {
     const orderData = {
-      name: cartData?.name,
-      price: cartData?.price,
-      quantity: cartData?.quantity,
-      email: cartData?.userEmail,
-      productId: cartData?.productId,
-      cartId: cartData?._id,
+      email: user?.email,
       totalPrice,
       totalItem,
     };

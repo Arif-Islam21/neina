@@ -82,7 +82,6 @@ async function run() {
 
     app.post("/order", async (req, res) => {
       const data = req.body;
-      return console.log(data);
       const result = await orderCollection.insertOne(data);
       const clearCart = await cartCollection.deleteMany({
         userEmail: data?.email,
