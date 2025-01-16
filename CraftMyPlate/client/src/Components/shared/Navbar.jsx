@@ -32,6 +32,14 @@ const Navbar = () => {
       name: "Cart",
       link: "/cart",
     },
+    {
+      name: "Order List",
+      link: "/order",
+    },
+    {
+      name: "Order History",
+      link: "/orderHistory",
+    },
   ];
 
   const navLinks = (

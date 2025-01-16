@@ -7,6 +7,8 @@ import Menu from "../Pages/Menu/Menu";
 import AddMenu from "../Pages/Menu/AddMenu";
 import UpdateMenu from "../Pages/Menu/UpdateMenu";
 import Cart from "../Pages/cart/Cart";
+import Order from "../Pages/Order/Order";
+import OrderHistory from "../Pages/Order/OrderHistory";
 
 const AppRoute = () => {
   return (
@@ -19,6 +21,8 @@ const AppRoute = () => {
         <Route path="/addMenu" element={<AddMenu />} />
         <Route path="/updateMenu/:id" element={<UpdateMenu />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/orderHistory" element={<OrderHistory />} />
       </Route>
     </Routes>
   );

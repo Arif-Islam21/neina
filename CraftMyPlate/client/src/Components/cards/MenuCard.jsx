@@ -23,7 +23,7 @@ const MenuCard = ({ item, refetch, role }) => {
       availability,
       category,
     };
-    const res = await AxiosCommon.post("/order", productInfo);
+    const res = await AxiosCommon.post("/cart", productInfo);
     if (res?.data?.insertedId) {
       Swal.fire({
         title: "Added to Cart",

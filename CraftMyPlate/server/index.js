@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.knlt5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const corsOptions = {
-  origin: true,
+  origin: ["http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -80,6 +80,18 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/order", async (req, res) => {
+      const result = await orderCollection.find().toArray();
+      res.send(result);
+    });
+
+    app.get("/orderHistory/:email", async (req, res) => {
+      const { email } = req.params;
+      const query = { email };
+      const result = await orderCollection.find(query).toArray();
+      res.send(result);
+    });
+
     app.post("/order", async (req, res) => {
       const data = req.body;
       const result = await orderCollection.insertOne(data);
@@ -99,7 +111,7 @@ async function run() {
       res.send(result);
     });
 
-    app.post("/order", async (req, res) => {
+    app.post("/cart", async (req, res) => {
       const data = req.body;
       const result = await cartCollection.insertOne(data);
       res.send(result);

@@ -10,7 +10,7 @@ const Cart = () => {
   const { data: cartData = [], refetch } = useQuery({
     queryKey: ["cart", user?.email],
     queryFn: async () => {
-      const { data } = await AxiosCommon.get(`cart/${user?.email}`);
+      const { data } = await AxiosCommon.get(`/cart/${user?.email}`);
       return data;
     },
   });
@@ -23,6 +23,8 @@ const Cart = () => {
       email: user?.email,
       totalPrice,
       totalItem,
+      status: "pending",
+      createdAt: new Date().toLocaleDateString(),
     };
     Swal.fire({
       title: "Are you sure?",
@@ -34,7 +36,7 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const { data } = await AxiosCommon.post("/order", orderData);
+        const { data } = await AxiosCommon.post(`/order`, orderData);
         if (data?.insertedId) {
           refetch();
           Swal.fire({
@@ -46,6 +48,17 @@ const Cart = () => {
       }
     });
   };
+
+  // if (cartData.length === 0) {
+  //   return (
+  //     <div className="container mx-auto">
+  //       <h1 className="text-2xl text-center mt-6">No item in the cart</h1>
+  //       <p className="text-center text-gray-600 font-semibold">
+  //         Add Item and revisit
+  //       </p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="container mx-auto">
