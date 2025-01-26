@@ -12,10 +12,15 @@ const Navbar = () => {
   const links = (
     <>
       {menuItems.map(({ label, path }) => (
-        <li key={label}>
+        <li key={label} className="py-3">
           <NavLink
             to={path}
-            className="text-[#4C4C4C] font-bold hover:text-primary"
+            className={({ isActive }) =>
+              isActive
+                ? "text-primary border border-gray-700 rounded-none font-bold mr-2 bg-[#FFE484] border-b-0"
+                : "text-[#4C4C4C] font-bold mr-2 hover:text-primary"
+            }
+            // className="text-[#4C4C4C] font-bold hover:text-primary"
           >
             {label}
           </NavLink>
@@ -25,8 +30,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-base-100 shadow-sm">
-      <div className="navbar container mx-auto">
+    <div className="bg-base-100 border-b-2 border-gray-600 shadow-sm">
+      <div className=" flex items-center container  mx-auto">
         <div className="navbar-start  max-w-fit px-12">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -60,14 +65,14 @@ const Navbar = () => {
             <AiOutlineStock /> Moneyy.ai
           </Link>
         </div>
-        <div className="navbar-center grow  hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+        <div className="h-full grow  hidden lg:flex">
+          <ul className="menu menu-horizontal  h-full py-0 px-1">
             {/* FOR LARGE DEVICES */}
             {links}
           </ul>
         </div>
         <div className="navbar-end ">
-          <a className="btn btn-primary">Button</a>
+          <a className="btn btn-primary mr-4 text-white">Sign Up Free</a>
         </div>
       </div>
     </div>

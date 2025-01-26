@@ -3,12 +3,12 @@
 @import "tailwindcss";
 @plugin 'daisyui';
 
-.primary {
+.primary-color {
   color: #2747dd;
 }
-/* .secondary {
+.bg-color {
   color: #f3f6ff;
-} */
+}
 
 body {
   font-family: "Poppins", serif;
