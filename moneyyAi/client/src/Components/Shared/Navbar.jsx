@@ -1,7 +1,9 @@
 import { AiOutlineStock } from "react-icons/ai";
-import { Link, NavLink } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+
   const menuItems = [
     { label: "AI Strategies", path: "/strategy" },
     { label: "Backtesting", path: "/backtesting" },
@@ -12,18 +14,17 @@ const Navbar = () => {
   const links = (
     <>
       {menuItems.map(({ label, path }) => (
-        <li key={label} className="py-3">
-          <NavLink
-            to={path}
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary border border-gray-700 rounded-none font-bold mr-2 bg-[#FFE484] border-b-0"
-                : "text-[#4C4C4C] font-bold mr-2 hover:text-primary"
-            }
-            // className="text-[#4C4C4C] font-bold hover:text-primary"
-          >
+        <li
+          key={label}
+          className={`py-3 ${
+            pathname === path
+              ? "text-primary border-2 border-gray-700 rounded-none font-bold mr-2 bg-[#FFE484] border-b-0"
+              : "text-[#4C4C4C] font-bold mr-2  hover:text-primary"
+          }`}
+        >
+          <Link to={path} className="rounded-none hover:bg-transparent">
             {label}
-          </NavLink>
+          </Link>
         </li>
       ))}
     </>
