@@ -16,7 +16,7 @@ const Navbar = () => {
       {menuItems.map(({ label, path }) => (
         <li
           key={label}
-          className={`py-3 ${
+          className={`py-3 transition-all delay-100 duration-300 ${
             pathname === path
               ? "text-primary border-2 border-gray-700 rounded-none font-bold mr-2 bg-[#FFE484] border-b-0"
               : "text-[#4C4C4C] font-bold mr-2  hover:text-primary"

@@ -6,7 +6,7 @@ const HomeLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-[calc(100vh-70px)] container mx-auto bg-secondary">
+      <div className="min-h-[calc(100vh-70px)] container mx-auto bg-[#F3F6FF]">
         <Outlet />
       </div>
       <Footer />
