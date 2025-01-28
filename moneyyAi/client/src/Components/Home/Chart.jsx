@@ -4,10 +4,9 @@ import {
   LineChart,
   Line,
   ResponsiveContainer,
-  XAxis,
-  YAxis,
   Tooltip,
   Area,
+  LabelList,
 } from "recharts";
 
 const Chart = () => {
@@ -67,20 +66,16 @@ const Chart = () => {
       className="min-h-[50vh] relative"
     >
       <div className="relative px-[10vw]  w-full h-[50vh] ">
-        <ResponsiveContainer
-          // className={`bg-[#E4F0FF]`}
-          width="100%"
-          height="100%"
-        >
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
             margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
           >
             <Tooltip />
             <defs>
-              <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#E3F0FF" stopOpacity={1} />
+                <stop offset="100%" stopColor="#EDF4FF" stopOpacity={1} />
               </linearGradient>
             </defs>
             <Area
@@ -90,12 +85,9 @@ const Chart = () => {
               fillOpacity={1}
               fill="url(#E4F0FF)"
             />
-            <Line
-              type="monotone"
-              dataKey="pv"
-              stroke="#8884d8"
-              strokeWidth={2}
-            />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2}>
+              <LabelList dataKey="name" position="top" />
+            </Line>
           </LineChart>
         </ResponsiveContainer>
       </div>
