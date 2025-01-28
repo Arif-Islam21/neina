@@ -1,6 +1,14 @@
 import image from "../../../public/images/moneyyTech.png";
 import "./styles.css";
-import { LineChart, Line, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Area,
+} from "recharts";
 
 const Chart = () => {
   const data = [
@@ -54,14 +62,43 @@ const Chart = () => {
         backgroundImage: `url(${image})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "0 center",
+        // backgroundSize: "contain",
       }}
-      className="min-h-[50vh]"
+      className="min-h-[50vh] relative"
     >
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart width={300} height={100} data={data}>
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
-        </LineChart>
-      </ResponsiveContainer>
+      <div className="relative px-[10vw]  w-full h-[50vh] ">
+        <ResponsiveContainer
+          // className={`bg-[#E4F0FF]`}
+          width="100%"
+          height="100%"
+        >
+          <LineChart
+            data={data}
+            margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
+          >
+            <Tooltip />
+            <defs>
+              <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <Area
+              type="monotone"
+              dataKey="pv"
+              stroke="#8884d8"
+              fillOpacity={1}
+              fill="url(#E4F0FF)"
+            />
+            <Line
+              type="monotone"
+              dataKey="pv"
+              stroke="#8884d8"
+              strokeWidth={2}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
